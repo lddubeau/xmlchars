@@ -1,0 +1,9 @@
+{
+  "extends": "../tslint.json",
+  "rules": {
+    "no-import-side-effect": false,
+    "no-implicit-dependencies": [true, "dev"],
+    "no-unused-expression": [false, "Happens all the time with Chai."],
+    "chai-vague-errors": [false, "Too onerous."]
+  }
+}
