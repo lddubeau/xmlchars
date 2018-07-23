@@ -17,6 +17,7 @@
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.4",
     "chai": "^4.1.2",
+    "conventional-changelog-cli": "^2.0.1",
     "husky": "^0.14.3",
     "mocha": "^5.2.0",
     "ts-node": "^7.0.0",
@@ -31,6 +32,7 @@
   ],
   "scripts": {
     "preversion": "npm run build && npm test",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "postversion": "npm publish",
     "postpublish": "git push origin --follow-tags",
     "build": "tsc",
