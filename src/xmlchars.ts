@@ -52,6 +52,84 @@ export namespace XML_1_0 {
       export const NMTOKEN = new RegExp(`^[${fragments.NAME_CHAR}]+$`, "u");
     }
 
+    const TAB = 9;
+    const NL = 0xA;
+    const CR = 0xD;
+    const SPACE = 0x20;
+    const MINUS = 0x2D;
+    const COLON = 0x3A;
+
+    /**
+     * Determines whether a codepoint matches the ``CHAR`` production.
+     *
+     * @param c The code point.
+     *
+     * @returns ``true`` if the codepoint matches ``CHAR``.
+     */
+    export function isChar(c: number): boolean {
+      return (c === TAB ||
+              c === NL ||
+              c === CR ||
+              (c >= SPACE && c <= 0xD7FF) ||
+              (c >= 0xE000 && c <= 0xFFFD) ||
+              (c >= 0x10000 && c <= 0x10FFFF));
+    }
+
+    /**
+     * Determines whether a codepoint matches the ``S`` (space) production.
+     *
+     * @param c The code point.
+     *
+     * @returns ``true`` if the codepoint matches ``S``.
+     */
+    export function isS(c: number): boolean {
+      return c === SPACE || c === NL || c === CR || c === TAB;
+    }
+
+    /**
+     * Determines whether a codepoint matches the ``NAME_START_CHAR``
+     * production.
+     *
+     * @param c The code point.
+     *
+     * @returns ``true`` if the codepoint matches ``NAME_START_CHAR``.
+     */
+    // tslint:disable-next-line:cyclomatic-complexity
+    export function isNameStartChar(c: number): boolean {
+      return (c === COLON ||
+              (c >= 0x41 && c <= 0x5A) ||
+              c === 0x5F ||
+              (c >= 0x61 && c <= 0x7A) ||
+              (c >= 0xC0 && c <= 0xD6) ||
+              (c >= 0xD8 && c <= 0xF6) ||
+              (c >= 0x00F8 && c <= 0x02FF) ||
+              (c >= 0x0370 && c <= 0x037D) ||
+              (c >= 0x037F && c <= 0x1FFF) ||
+              (c >= 0x200C && c <= 0x200D) ||
+              (c >= 0x2070 && c <= 0x218F) ||
+              (c >= 0x2C00 && c <= 0x2FEF) ||
+              (c >= 0x3001 && c <= 0xD7FF) ||
+              (c >= 0xF900 && c <= 0xFDCF) ||
+              (c >= 0xFDF0 && c <= 0xFFFD) ||
+              (c >= 0x10000 && c <= 0xEFFFF));
+    }
+
+    /**
+     * Determines whether a codepoint matches the ``NAME_CHAR`` production.
+     *
+     * @param c The code point.
+     *
+     * @returns ``true`` if the codepoint matches ``NAME_CHAR``.
+     */
+    export function isNameChar(c: number): boolean {
+      return isNameStartChar(c) ||
+        (c === MINUS ||
+         c === 0x2E ||
+         (c >= 0x30 && c <= 0x39) ||
+         c === 0x00B7 ||
+         (c >= 0x0300 && c <= 0x036F) ||
+         (c >= 0x203F && c <= 0x2040));
+    }
   }
 
   /**

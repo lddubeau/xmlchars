@@ -82,6 +82,11 @@ const leadingDigit: Fixture = {
   data: "1bar",
 };
 
+const bom: Fixture = {
+  name: "bom",
+  data: "\uFFFE",
+};
+
 // tslint:disable-next-line:mocha-no-side-effect-code
 const ALL_FIXTURES = new Set([
   x,
@@ -99,6 +104,7 @@ const ALL_FIXTURES = new Set([
   leadingDot,
   leadingDash,
   leadingDigit,
+  bom,
 ]);
 
 interface Case {
@@ -132,8 +138,39 @@ function makeTests(re: RegExp, testCase: Case): void {
   });
 }
 
+function makeCodePointTestTests(codePointTest: (c: number) => boolean,
+                                testCase: Case): void {
+  for (const fixture of testCase.matching) {
+    const { data, name } = fixture;
+    // tslint:disable-next-line:no-non-null-assertion
+    const code = data.codePointAt(0)!;
+    if (data.length > String.fromCodePoint(code).length) {
+      // We skip those fixtures that contain more than one character.
+      continue;
+    }
+    it(`matches ${name}`, () => {
+      expect(codePointTest(code)).to.be.true;
+    });
+  }
+
+  for (const fixture of ALL_FIXTURES) {
+    if (!testCase.matching.includes(fixture)) {
+      const { data, name } = fixture;
+      // tslint:disable-next-line:no-non-null-assertion
+      const code = data.codePointAt(0)!;
+      if (data.length > String.fromCodePoint(code).length) {
+        // We skip those fixtures that contain more than one character.
+        continue;
+      }
+      it(`does not match ${name}`, () => {
+        expect(codePointTest(code)).to.be.false;
+      });
+    }
+  }
+}
+
 describe("XML_1_0", () => {
-  describe("ED5.regexes", () => {
+  describe("ED5", () => {
     // tslint:disable-next-line:mocha-no-side-effect-code
     const cases: Record<ED5_REGEX_NAMES, Case> = {
       CHAR: {
@@ -156,15 +193,38 @@ describe("XML_1_0", () => {
         matching: [x, abc, ideographic, nameWithColon, leadingDot, leadingDash,
                    leadingDigit, combining, extender, digit, poo],
       },
+      // tslint:disable-next-line:no-any
     } as any;
+    describe(".regexes", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
+        describe(name, () => {
+          // tslint:disable-next-line:mocha-no-side-effect-code
+          makeTests(XML_1_0.ED5.regexes[name], cases[name]);
+        });
+      }
+    });
 
-    // tslint:disable-next-line:mocha-no-side-effect-code
-    for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
-      describe(name, () => {
-        // tslint:disable-next-line:mocha-no-side-effect-code
-        makeTests(XML_1_0.ED5.regexes[name], cases[name]);
-      });
-    }
+    describe(".isChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(XML_1_0.ED5.isChar, cases.CHAR);
+    });
+
+    describe(".isS", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(XML_1_0.ED5.isS, cases.S);
+    });
+
+    describe(".isNameStartChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(XML_1_0.ED5.isNameStartChar,
+                             cases.NAME_START_CHAR);
+    });
+
+    describe(".isNameChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(XML_1_0.ED5.isNameChar, cases.NAME_CHAR);
+    });
   });
 
   describe("ED4.regexes", () => {
@@ -205,6 +265,7 @@ describe("XML_1_0", () => {
         matching: [x, abc, ideographic, nameWithColon, leadingDot, leadingDash,
                    leadingDigit, combining, extender, digit],
       },
+      // tslint:disable-next-line:no-any
     } as any;
 
     // tslint:disable-next-line:mocha-no-side-effect-code
