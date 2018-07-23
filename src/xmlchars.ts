@@ -6,13 +6,13 @@
  */
 
 /**
- * Character classes for XML 1.0.
+ * Character class utilities for XML 1.0.
  */
 export namespace XML_1_0 {
-  /*
+  /**
    * Fifth edition.
    */
-   export namespace ED5 {
+  export namespace ED5 {
     /**
      * Regular expression fragments. These fragments are designed to be included
      * inside square brackets in a regular expression.
@@ -51,14 +51,15 @@ export namespace XML_1_0 {
 
       export const NMTOKEN = new RegExp(`^[${fragments.NAME_CHAR}]+$`, "u");
     }
-   }
 
-  /*
+  }
+
+  /**
    * Fourth edition. These are deprecated in the 5th edition but some of the
    * standards related to XML 1.0 (e.g. XML Schema 1.0) refer to these. So they
    * are still generally useful.
    */
-   export namespace ED4 {
+  export namespace ED4 {
     /**
      * Regular expression fragments. These fragments are designed to be included
      * inside square brackets in a regular expression.
