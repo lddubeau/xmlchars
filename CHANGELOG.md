@@ -1,3 +1,13 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/lddubeau/xmlchars/compare/v1.2.0...v1.3.0) (2018-09-06)
+
+
+### Features
+
+* introduce fine-grained modules ([e49461b](https://github.com/lddubeau/xmlchars/commit/e49461b))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/lddubeau/xmlchars/compare/v1.1.0...v1.2.0) (2018-09-06)
 
