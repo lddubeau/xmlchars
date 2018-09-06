@@ -60,6 +60,17 @@ export namespace XML_1_0 {
     const COLON = 0x3A;
 
     /**
+     * Lists of characters.
+     *
+     * The names defined in this namespace are arrays of codepoints which
+     * contain the set of codepoints that an XML production encompasses. Note
+     * that many productions are too large to be reasonably represented as sets.
+     */
+    export namespace lists {
+      export const S = [SPACE, NL, CR, TAB];
+    }
+
+    /**
      * Determines whether a codepoint matches the ``CHAR`` production.
      *
      * @param c The code point.
