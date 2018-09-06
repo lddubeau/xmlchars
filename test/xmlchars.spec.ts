@@ -1,6 +1,6 @@
 // tslint:disable-next-line:missing-jsdoc
 import { expect } from "chai";
-import { XML_1_0 } from "../src/xmlchars";
+import { XML_1_0, XMLNS_1_0 } from "../src/xmlchars";
 
 interface Fixture {
   name: string;
@@ -20,6 +20,11 @@ const abc: Fixture = {
 const poo: Fixture = {
   name: "poo test",
   data: "\u{1F4A9}",
+};
+
+const colon: Fixture = {
+  name: "colon",
+  data: ":",
 };
 
 const space: Fixture = {
@@ -92,6 +97,7 @@ const ALL_FIXTURES = new Set([
   x,
   abc,
   poo,
+  colon,
   space,
   tab,
   newline,
@@ -110,9 +116,6 @@ const ALL_FIXTURES = new Set([
 interface Case {
   matching: Fixture[];
 }
-
-type ED4_REGEX_NAMES = keyof typeof XML_1_0.ED4.regexes;
-type ED5_REGEX_NAMES = keyof typeof XML_1_0.ED5.regexes;
 
 function makeTests(re: RegExp, testCase: Case): void {
   describe("matches", () => {
@@ -172,26 +175,26 @@ function makeCodePointTestTests(codePointTest: (c: number) => boolean,
 describe("XML_1_0", () => {
   describe("ED5", () => {
     // tslint:disable-next-line:mocha-no-side-effect-code
-    const cases: Record<ED5_REGEX_NAMES, Case> = {
+    const cases: Record<keyof typeof XML_1_0.ED5.regexes, Case> = {
       CHAR: {
-        matching: [x, poo, space, tab, newline, cr, ideographic, combining,
-                   digit, extender],
+        matching: [x, poo, colon, space, tab, newline, cr, ideographic,
+                   combining, digit, extender],
       },
       S: {
         matching: [space, tab, newline, cr],
       },
       NAME_START_CHAR: {
-        matching: [x, ideographic, poo],
+        matching: [x, ideographic, poo, colon],
       },
       NAME_CHAR: {
-        matching: [x, ideographic, poo, combining, extender, digit],
+        matching: [x, ideographic, poo, colon, combining, extender, digit],
       },
       NAME: {
-        matching: [x, abc, ideographic, nameWithColon, poo],
+        matching: [x, abc, ideographic, colon, nameWithColon, poo],
       },
       NMTOKEN: {
-        matching: [x, abc, ideographic, nameWithColon, leadingDot, leadingDash,
-                   leadingDigit, combining, extender, digit, poo],
+        matching: [x, abc, ideographic, colon, nameWithColon, leadingDot,
+                   leadingDash, leadingDigit, combining, extender, digit, poo],
       },
       // tslint:disable-next-line:no-any
     } as any;
@@ -229,10 +232,10 @@ describe("XML_1_0", () => {
 
   describe("ED4.regexes", () => {
     // tslint:disable-next-line:mocha-no-side-effect-code
-    const cases: Record<ED4_REGEX_NAMES, Case> = {
+    const cases: Record<keyof typeof XML_1_0.ED4.regexes, Case> = {
       CHAR: {
-        matching: [x, poo, space, tab, newline, cr, ideographic, combining,
-                   digit, extender],
+        matching: [x, poo, colon, space, tab, newline, cr, ideographic,
+                   combining, digit, extender],
       },
       S: {
         matching: [space, tab, newline, cr],
@@ -256,14 +259,14 @@ describe("XML_1_0", () => {
         matching: [x, ideographic],
       },
       NAME_CHAR: {
-        matching: [x, ideographic, digit, extender, combining],
+        matching: [x, ideographic, colon, digit, extender, combining],
       },
       NAME: {
-        matching: [x, abc, ideographic, nameWithColon],
+        matching: [x, abc, ideographic, colon, nameWithColon],
       },
       NMTOKEN: {
-        matching: [x, abc, ideographic, nameWithColon, leadingDot, leadingDash,
-                   leadingDigit, combining, extender, digit],
+        matching: [x, abc, ideographic, colon, nameWithColon, leadingDot,
+                   leadingDash, leadingDigit, combining, extender, digit],
       },
       // tslint:disable-next-line:no-any
     } as any;
@@ -275,5 +278,44 @@ describe("XML_1_0", () => {
         makeTests(XML_1_0.ED4.regexes[name], cases[name]);
       });
     }
+  });
+});
+
+describe("XML_NS_1_0", () => {
+  describe("ED3", () => {
+    // tslint:disable-next-line:mocha-no-side-effect-code
+    const cases: Record<keyof typeof XMLNS_1_0.ED3.regexes, Case> = {
+      NC_NAME_START_CHAR: {
+        matching: [x, ideographic, poo],
+      },
+      NC_NAME_CHAR: {
+        matching: [x, ideographic, poo, combining, extender, digit],
+      },
+      NC_NAME: {
+        matching: [x, abc, ideographic, poo],
+      },
+      // tslint:disable-next-line:no-any
+    } as any;
+
+    describe(".regexes", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
+        describe(name, () => {
+          // tslint:disable-next-line:mocha-no-side-effect-code
+          makeTests(XMLNS_1_0.ED3.regexes[name], cases[name]);
+        });
+      }
+    });
+
+    describe(".isNCNameStartChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(XMLNS_1_0.ED3.isNCNameStartChar,
+                             cases.NC_NAME_START_CHAR);
+    });
+
+    describe(".isNCNameChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(XMLNS_1_0.ED3.isNCNameChar, cases.NC_NAME_CHAR);
+    });
   });
 });
