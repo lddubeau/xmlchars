@@ -1,6 +1,9 @@
 // tslint:disable-next-line:missing-jsdoc
 import { expect } from "chai";
+import * as xml_1_0_ed4 from "../src/xml/1.0/ed4";
+import * as xml_1_0_ed5 from "../src/xml/1.0/ed5";
 import { XML_1_0, XMLNS_1_0 } from "../src/xmlchars";
+import * as xmlns_1_0_ed3 from "../src/xmlns/1.0/ed3";
 
 interface Fixture {
   name: string;
@@ -196,8 +199,7 @@ describe("XML_1_0", () => {
         matching: [x, abc, ideographic, colon, nameWithColon, leadingDot,
                    leadingDash, leadingDigit, combining, extender, digit, poo],
       },
-      // tslint:disable-next-line:no-any
-    } as any;
+    };
     describe(".regexes", () => {
       // tslint:disable-next-line:mocha-no-side-effect-code
       for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
@@ -268,8 +270,7 @@ describe("XML_1_0", () => {
         matching: [x, abc, ideographic, colon, nameWithColon, leadingDot,
                    leadingDash, leadingDigit, combining, extender, digit],
       },
-      // tslint:disable-next-line:no-any
-    } as any;
+    };
 
     // tslint:disable-next-line:mocha-no-side-effect-code
     for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
@@ -294,8 +295,7 @@ describe("XML_NS_1_0", () => {
       NC_NAME: {
         matching: [x, abc, ideographic, poo],
       },
-      // tslint:disable-next-line:no-any
-    } as any;
+    };
 
     describe(".regexes", () => {
       // tslint:disable-next-line:mocha-no-side-effect-code
@@ -316,6 +316,158 @@ describe("XML_NS_1_0", () => {
     describe(".isNCNameChar", () => {
       // tslint:disable-next-line:mocha-no-side-effect-code
       makeCodePointTestTests(XMLNS_1_0.ED3.isNCNameChar, cases.NC_NAME_CHAR);
+    });
+  });
+});
+
+type FilterPropertyName<T, P> =
+  { [K in keyof T]: T[K] extends P ? K : never }[keyof T];
+
+describe("xml/1.0", () => {
+  describe("ed5", () => {
+    // tslint:disable-next-line:mocha-no-side-effect-code
+    const cases: Record<FilterPropertyName<typeof xml_1_0_ed5, RegExp>,
+    Case> = {
+      CHAR_RE: {
+        matching: [x, poo, colon, space, tab, newline, cr, ideographic,
+                   combining, digit, extender],
+      },
+      S_RE: {
+        matching: [space, tab, newline, cr],
+      },
+      NAME_START_CHAR_RE: {
+        matching: [x, ideographic, poo, colon],
+      },
+      NAME_CHAR_RE: {
+        matching: [x, ideographic, poo, colon, combining, extender, digit],
+      },
+      NAME_RE: {
+        matching: [x, abc, ideographic, colon, nameWithColon, poo],
+      },
+      NMTOKEN_RE: {
+        matching: [x, abc, ideographic, colon, nameWithColon, leadingDot,
+                   leadingDash, leadingDigit, combining, extender, digit, poo],
+      },
+    };
+
+    describe("regexes", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
+        describe(name, () => {
+          // tslint:disable-next-line:mocha-no-side-effect-code
+          makeTests(xml_1_0_ed5[name], cases[name]);
+        });
+      }
+    });
+
+    describe(".isChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xml_1_0_ed5.isChar, cases.CHAR_RE);
+    });
+
+    describe(".isS", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xml_1_0_ed5.isS, cases.S_RE);
+    });
+
+    describe(".isNameStartChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xml_1_0_ed5.isNameStartChar,
+                             cases.NAME_START_CHAR_RE);
+    });
+
+    describe(".isNameChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xml_1_0_ed5.isNameChar, cases.NAME_CHAR_RE);
+    });
+  });
+
+  describe("ed4 regexes", () => {
+    // tslint:disable-next-line:mocha-no-side-effect-code
+    const cases: Record<FilterPropertyName<typeof xml_1_0_ed4, RegExp>,
+    Case> = {
+      CHAR_RE: {
+        matching: [x, poo, colon, space, tab, newline, cr, ideographic,
+                   combining, digit, extender],
+      },
+      S_RE: {
+        matching: [space, tab, newline, cr],
+      },
+      BASE_CHAR_RE: {
+        matching: [x],
+      },
+      IDEOGRAPHIC_RE: {
+        matching: [ideographic],
+      },
+      COMBINING_CHAR_RE: {
+        matching: [combining],
+      },
+      DIGIT_RE: {
+        matching: [digit],
+      },
+      EXTENDER_RE: {
+        matching: [extender],
+      },
+      LETTER_RE: {
+        matching: [x, ideographic],
+      },
+      NAME_CHAR_RE: {
+        matching: [x, ideographic, colon, digit, extender, combining],
+      },
+      NAME_RE: {
+        matching: [x, abc, ideographic, colon, nameWithColon],
+      },
+      NMTOKEN_RE: {
+        matching: [x, abc, ideographic, colon, nameWithColon, leadingDot,
+                   leadingDash, leadingDigit, combining, extender, digit],
+      },
+    };
+
+    // tslint:disable-next-line:mocha-no-side-effect-code
+    for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
+      describe(name, () => {
+        // tslint:disable-next-line:mocha-no-side-effect-code
+        makeTests(xml_1_0_ed4[name], cases[name]);
+      });
+    }
+  });
+});
+
+describe("xmlns/1.0", () => {
+  describe("ed3", () => {
+    // tslint:disable-next-line:mocha-no-side-effect-code
+    const cases: Record<FilterPropertyName<typeof xmlns_1_0_ed3, RegExp>,
+    Case> = {
+      NC_NAME_START_CHAR_RE: {
+        matching: [x, ideographic, poo],
+      },
+      NC_NAME_CHAR_RE: {
+        matching: [x, ideographic, poo, combining, extender, digit],
+      },
+      NC_NAME_RE: {
+        matching: [x, abc, ideographic, poo],
+      },
+    };
+
+    describe("regexes", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
+        describe(name, () => {
+          // tslint:disable-next-line:mocha-no-side-effect-code
+          makeTests(xmlns_1_0_ed3[name], cases[name]);
+        });
+      }
+    });
+
+    describe(".isNCNameStartChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xmlns_1_0_ed3.isNCNameStartChar,
+                             cases.NC_NAME_START_CHAR_RE);
+    });
+
+    describe(".isNCNameChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xmlns_1_0_ed3.isNCNameChar, cases.NC_NAME_CHAR_RE);
     });
   });
 });
