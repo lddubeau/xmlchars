@@ -1,6 +1,9 @@
 /**
  * Character classes for XML.
  *
+ * @deprecated since 1.3.0. Import from the ``xml`` and ``xmlns`` hierarchies
+ * instead.
+ *
  * @author Louis-Dominique Dubeau
  * @license MIT
  * @copyright Louis-Dominique Dubeau
@@ -9,6 +12,9 @@
 import * as ed4 from "./xml/1.0/ed4";
 import * as ed5 from "./xml/1.0/ed5";
 import * as nsed3 from "./xmlns/1.0/ed3";
+
+console.warn("DECPRECATION WARNING: the xmlchar *module* is deprecated: please \
+replace e.g. require('xmlchars') with require('xmlchars/lib/xml/...')");
 
 /**
  * Character class utilities for XML 1.0.
