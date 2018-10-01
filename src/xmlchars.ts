@@ -13,7 +13,7 @@ import * as ed4 from "./xml/1.0/ed4";
 import * as ed5 from "./xml/1.0/ed5";
 import * as nsed3 from "./xmlns/1.0/ed3";
 
-console.warn("DECPRECATION WARNING: the xmlchar *module* is deprecated: please \
+console.warn("DEPRECATION WARNING: the xmlchar *module* is deprecated: please \
 replace e.g. require('xmlchars') with require('xmlchars/xml/...')");
 
 /**
