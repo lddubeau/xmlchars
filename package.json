@@ -12,18 +12,18 @@
   "author": "Louis-Dominique Dubeau <ldd@lddubeau.com>",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "^7.0.0",
-    "@commitlint/config-angular": "^7.0.1",
-    "@types/chai": "^4.1.4",
-    "@types/mocha": "^5.2.4",
-    "chai": "^4.1.2",
-    "conventional-changelog-cli": "^2.0.1",
-    "husky": "^0.14.3",
-    "mocha": "^5.2.0",
-    "ts-node": "^7.0.0",
-    "tslint": "^5.10.0",
-    "tslint-config-lddubeau": "^2.0.3",
-    "typescript": "^2.9.2"
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-angular": "^8.0.0",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "conventional-changelog-cli": "^2.0.21",
+    "husky": "^2.4.0",
+    "mocha": "^6.1.4",
+    "ts-node": "^8.2.0",
+    "tslint": "^5.17.0",
+    "tslint-config-lddubeau": "^4.1.0",
+    "typescript": "^3.5.1"
   },
   "scripts": {
     "copy": "cp README.md LICENSE build/dist && sed -e'/\"private\": true/d' package.json > build/dist/package.json",
@@ -40,8 +40,12 @@
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "postversion": "npm run xmlchars:publish",
     "postpublish": "git push origin --follow-tags",
-    "clean": "rm -rf build",
-    "commitmsg": "commitlint -E GIT_PARAMS"
+    "clean": "rm -rf build"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  }
 }

@@ -13,12 +13,14 @@ import * as ed4 from "./xml/1.0/ed4";
 import * as ed5 from "./xml/1.0/ed5";
 import * as nsed3 from "./xmlns/1.0/ed3";
 
+// tslint:disable-next-line:no-console
 console.warn("DEPRECATION WARNING: the xmlchar *module* is deprecated: please \
 replace e.g. require('xmlchars') with require('xmlchars/xml/...')");
 
 /**
  * Character class utilities for XML 1.0.
  */
+// tslint:disable-next-line:no-namespace
 export namespace XML_1_0 {
   /**
    * Fifth edition.
@@ -142,6 +144,7 @@ export namespace XML_1_0 {
 /**
  * Character class utilities for XML NS 1.0.
  */
+// tslint:disable-next-line:no-namespace
 export namespace XMLNS_1_0 {
 
   /**
