@@ -20,7 +20,7 @@
     "conventional-changelog-cli": "^2.0.22",
     "husky": "^2.4.1",
     "mocha": "^6.1.4",
-    "ts-node": "^8.2.0",
+    "ts-node": "^8.3.0",
     "tslint": "^5.17.0",
     "tslint-config-lddubeau": "^4.1.0",
     "typescript": "^3.5.2"
