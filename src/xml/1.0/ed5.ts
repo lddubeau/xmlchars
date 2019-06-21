@@ -55,12 +55,10 @@ export const S_LIST = [SPACE, NL, CR, TAB];
  * @returns ``true`` if the codepoint matches ``CHAR``.
  */
 export function isChar(c: number): boolean {
-  return (c === TAB ||
-          c === NL ||
-          c === CR ||
-          (c >= SPACE && c <= 0xD7FF) ||
-          (c >= 0xE000 && c <= 0xFFFD) ||
-          (c >= 0x10000 && c <= 0x10FFFF));
+  return (c > SPACE && c <= 0xD7FF) ||
+    S_LIST.includes(c) ||
+    (c >= 0xE000 && c <= 0xFFFD) ||
+    (c >= 0x10000 && c <= 0x10FFFF);
 }
 
 /**
