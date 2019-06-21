@@ -73,7 +73,7 @@ export function isChar(c: number): boolean {
  * @returns ``true`` if the codepoint matches ``S``.
  */
 export function isS(c: number): boolean {
-  return c === SPACE || c === NL || c === CR || c === TAB;
+  return S_LIST.includes(c);
 }
 
 /**
