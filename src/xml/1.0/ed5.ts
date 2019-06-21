@@ -39,8 +39,6 @@ const TAB = 9;
 const NL = 0xA;
 const CR = 0xD;
 const SPACE = 0x20;
-const MINUS = 0x2D;
-const COLON = 0x3A;
 
 //
 // Lists.
@@ -85,7 +83,7 @@ export function isS(c: number): boolean {
  */
 // tslint:disable-next-line:cyclomatic-complexity
 export function isNameStartChar(c: number): boolean {
-  return (c === COLON ||
+  return (c === 0x3A ||
           (c >= 0x41 && c <= 0x5A) ||
           c === 0x5F ||
           (c >= 0x61 && c <= 0x7A) ||
@@ -113,7 +111,7 @@ export function isNameStartChar(c: number): boolean {
  */
 export function isNameChar(c: number): boolean {
   return isNameStartChar(c) ||
-    (c === MINUS ||
+    (c === 0x2D ||
      c === 0x2E ||
      (c >= 0x30 && c <= 0x39) ||
      c === 0x00B7 ||
