@@ -72,6 +72,8 @@ export function isS(c: number): boolean {
   return S_LIST.includes(c);
 }
 
+const NAME_START_CHAR_LIST = [0x3A, 0x5F, 0x200C, 0x200D];
+
 /**
  * Determines whether a codepoint matches the ``NAME_START_CHAR`` production.
  *
@@ -79,19 +81,15 @@ export function isS(c: number): boolean {
  *
  * @returns ``true`` if the codepoint matches ``NAME_START_CHAR``.
  */
-// tslint:disable-next-line:cyclomatic-complexity
 export function isNameStartChar(c: number): boolean {
-  return (c === 0x3A ||
-          (c >= 0x41 && c <= 0x5A) ||
-          c === 0x5F ||
+  return ((c >= 0x41 && c <= 0x5A) ||
           (c >= 0x61 && c <= 0x7A) ||
+          NAME_START_CHAR_LIST.includes(c) ||
           (c >= 0xC0 && c <= 0xD6) ||
           (c >= 0xD8 && c <= 0xF6) ||
           (c >= 0x00F8 && c <= 0x02FF) ||
           (c >= 0x0370 && c <= 0x037D) ||
           (c >= 0x037F && c <= 0x1FFF) ||
-          c === 0x200C ||
-          c === 0x200D ||
           (c >= 0x2070 && c <= 0x218F) ||
           (c >= 0x2C00 && c <= 0x2FEF) ||
           (c >= 0x3001 && c <= 0xD7FF) ||
@@ -99,6 +97,8 @@ export function isNameStartChar(c: number): boolean {
           (c >= 0xFDF0 && c <= 0xFFFD) ||
           (c >= 0x10000 && c <= 0xEFFFF));
 }
+
+const NAME_CHAR_LIST = [0x2D, 0x2E, 0xB7];
 
 /**
  * Determines whether a codepoint matches the ``NAME_CHAR`` production.
@@ -109,10 +109,8 @@ export function isNameStartChar(c: number): boolean {
  */
 export function isNameChar(c: number): boolean {
   return isNameStartChar(c) ||
-    (c === 0x2D ||
-     c === 0x2E ||
-     (c >= 0x30 && c <= 0x39) ||
-     c === 0x00B7 ||
-     (c >= 0x0300 && c <= 0x036F) ||
-     (c >= 0x203F && c <= 0x2040));
+    (c >= 0x30 && c <= 0x39) ||
+    NAME_CHAR_LIST.includes(c) ||
+    (c >= 0x0300 && c <= 0x036F) ||
+    (c >= 0x203F && c <= 0x2040);
 }
