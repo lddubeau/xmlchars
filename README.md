@@ -14,6 +14,7 @@ last updated, we had:
 
 * `xmlchars/xml/1.0/ed5` which covers XML 1.0 edition 5.
 * `xmlchars/xml/1.0/ed4` which covers XML 1.0 edition 4.
+* `xmlchars/xml/1.1/ed2` which covers XML 1.0 edition 2.
 * `xmlchars/xmlns/1.0/ed3` which covers XML Namespaces 1.0 edition 3.
 
 ## Features
