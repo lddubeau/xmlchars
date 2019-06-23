@@ -9,10 +9,6 @@ work well for people who cared about code optimization. Importing `xmlchars`
 meant importing *all* of the library and because of the way the code was
 generated there was no way to shake the resulting code tree.
 
-Since version 1.3.0, importing `xmlchars` is deprecated. Instead, you should
-directly load the file from `xmlchars/lib` that you care about. Even without
-tree shaking being used, this results in a smaller footprint.
-
 Different modules cover different standards. At the time this documentation was
 last updated, we had:
 
