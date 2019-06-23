@@ -1,6 +1,6 @@
 {
   "name": "xmlchars",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Utilities for determining if characters belong to character classes defined by the XML specs.",
   "keywords": [
     "XML",

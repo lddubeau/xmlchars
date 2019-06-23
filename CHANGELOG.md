@@ -1,3 +1,13 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/lddubeau/xmlchars/compare/v2.0.0...v2.0.1) (2019-06-23)
+
+
+### Performance Improvements
+
+* remove the include calls ([338b9b1](https://github.com/lddubeau/xmlchars/commit/338b9b1))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/lddubeau/xmlchars/compare/v1.3.1...v2.0.0) (2019-06-23)
 
