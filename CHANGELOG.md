@@ -1,3 +1,30 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/lddubeau/xmlchars/compare/v1.3.1...v2.0.0) (2019-06-23)
+
+
+### Code Refactoring
+
+* drop the xmlchars module ([b9f8285](https://github.com/lddubeau/xmlchars/commit/b9f8285))
+
+
+### Features
+
+* add initial support for XML 1.1. edition 2 ([baaa734](https://github.com/lddubeau/xmlchars/commit/baaa734))
+
+
+### Performance Improvements
+
+* include is faster than individual tests ([db94653](https://github.com/lddubeau/xmlchars/commit/db94653))
+* reorganize isChar for speed ([98748bc](https://github.com/lddubeau/xmlchars/commit/98748bc))
+* reorganize name tests for speed ([a55561d](https://github.com/lddubeau/xmlchars/commit/a55561d))
+
+
+### BREAKING CHANGES
+
+* the xmlchars module, which had been deprecated, is now gone.
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/lddubeau/xmlchars/compare/v1.3.0...v1.3.1) (2018-10-01)
 
