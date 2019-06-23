@@ -55,8 +55,8 @@ export const S_LIST = [SPACE, NL, CR, TAB];
  * @returns ``true`` if the codepoint matches ``CHAR``.
  */
 export function isChar(c: number): boolean {
-  return (c > SPACE && c <= 0xD7FF) ||
-    S_LIST.includes(c) ||
+  return (c >= SPACE && c <= 0xD7FF) ||
+    c === NL || c === CR || c === TAB ||
     (c >= 0xE000 && c <= 0xFFFD) ||
     (c >= 0x10000 && c <= 0x10FFFF);
 }
@@ -69,10 +69,8 @@ export function isChar(c: number): boolean {
  * @returns ``true`` if the codepoint matches ``S``.
  */
 export function isS(c: number): boolean {
-  return S_LIST.includes(c);
+  return c === SPACE || c === NL || c === CR || c === TAB;
 }
-
-const NAME_START_CHAR_LIST = [0x3A, 0x5F, 0x200C, 0x200D];
 
 /**
  * Determines whether a codepoint matches the ``NAME_START_CHAR`` production.
@@ -84,7 +82,10 @@ const NAME_START_CHAR_LIST = [0x3A, 0x5F, 0x200C, 0x200D];
 export function isNameStartChar(c: number): boolean {
   return ((c >= 0x41 && c <= 0x5A) ||
           (c >= 0x61 && c <= 0x7A) ||
-          NAME_START_CHAR_LIST.includes(c) ||
+          c === 0x3A ||
+          c === 0x5F ||
+          c === 0x200C ||
+          c === 0x200D ||
           (c >= 0xC0 && c <= 0xD6) ||
           (c >= 0xD8 && c <= 0xF6) ||
           (c >= 0x00F8 && c <= 0x02FF) ||
@@ -98,8 +99,6 @@ export function isNameStartChar(c: number): boolean {
           (c >= 0x10000 && c <= 0xEFFFF));
 }
 
-const NAME_CHAR_LIST = [0x2D, 0x2E, 0xB7];
-
 /**
  * Determines whether a codepoint matches the ``NAME_CHAR`` production.
  *
@@ -110,7 +109,9 @@ const NAME_CHAR_LIST = [0x2D, 0x2E, 0xB7];
 export function isNameChar(c: number): boolean {
   return isNameStartChar(c) ||
     (c >= 0x30 && c <= 0x39) ||
-    NAME_CHAR_LIST.includes(c) ||
+    c === 0x2D ||
+    c === 0x2E ||
+    c === 0xB7 ||
     (c >= 0x0300 && c <= 0x036F) ||
     (c >= 0x203F && c <= 0x2040);
 }
