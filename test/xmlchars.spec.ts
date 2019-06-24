@@ -303,6 +303,9 @@ describe("xml/1.1", () => {
         matching: [one, x, poo, colon, space, tab, newline, cr, ideographic,
                    combining, digit, extender],
       },
+      RESTRICTED_CHAR_RE: {
+        matching: [one],
+      },
       S_RE: {
         matching: [space, tab, newline, cr],
       },
@@ -334,6 +337,12 @@ describe("xml/1.1", () => {
     describe(".isChar", () => {
       // tslint:disable-next-line:mocha-no-side-effect-code
       makeCodePointTestTests(xml_1_1_ed2.isChar, cases.CHAR_RE);
+    });
+
+    describe(".isRestrictedChar", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xml_1_1_ed2.isRestrictedChar,
+                             cases.RESTRICTED_CHAR_RE);
     });
 
     describe(".isS", () => {
