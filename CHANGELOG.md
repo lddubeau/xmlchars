@@ -1,3 +1,13 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/lddubeau/xmlchars/compare/v2.0.1...v2.1.0) (2019-06-24)
+
+
+### Features
+
+* add support for the RestrictedChar production ([d6c4384](https://github.com/lddubeau/xmlchars/commit/d6c4384))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/lddubeau/xmlchars/compare/v2.0.0...v2.0.1) (2019-06-23)
 
