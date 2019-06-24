@@ -11,6 +11,9 @@
 //
 export const CHAR = "\u0001-\uD7FF\uE000-\uFFFD\u{10000}-\u{10FFFF}";
 
+export const RESTRICTED_CHAR =
+  "\u0001-\u0008\u000B\u000C\u000E-\u001F\u007F-\u0084\u0086-\u009F";
+
 export const S = " \t\r\n";
 
 // tslint:disable-next-line:max-line-length
@@ -24,6 +27,8 @@ export const NAME_CHAR =
 //
 
 export const CHAR_RE = new RegExp(`^[${CHAR}]$`, "u");
+
+export const RESTRICTED_CHAR_RE = new RegExp(`^[${RESTRICTED_CHAR}]$`, "u");
 
 export const S_RE = new RegExp(`^[${S}]+$`, "u");
 
@@ -58,6 +63,22 @@ export function isChar(c: number): boolean {
   return (c >= 0x0001 && c <= 0xD7FF) ||
     (c >= 0xE000 && c <= 0xFFFD) ||
     (c >= 0x10000 && c <= 0x10FFFF);
+}
+
+/**
+ * Determines whether a codepoint matches the ``RESTRICTED_CHAR`` production.
+ *
+ * @param c The code point.
+ *
+ * @returns ``true`` if the codepoint matches ``RESTRICTED_CHAR``.
+ */
+export function isRestrictedChar(c: number): boolean {
+  return (c >= 0x1 && c <= 0x8) ||
+    c === 0xB ||
+    c === 0xC ||
+    (c >= 0xE && c <= 0x1F) ||
+    (c >= 0x7F && c <= 0x84) ||
+    (c >= 0x86 && c <= 0x9F);
 }
 
 /**
