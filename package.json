@@ -23,7 +23,7 @@
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "tslint-config-lddubeau": "^4.1.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "copy": "cp README.md LICENSE build/dist && sed -e'/\"private\": true/d' package.json > build/dist/package.json",
