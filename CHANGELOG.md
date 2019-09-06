@@ -1,3 +1,13 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/lddubeau/xmlchars/compare/v2.1.1...v2.2.0) (2019-09-06)
+
+
+### Features
+
+* add isCharAndNotRestricted to xml/1.1/ed2 ([907ae53](https://github.com/lddubeau/xmlchars/commit/907ae53))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/lddubeau/xmlchars/compare/v2.0.1...v2.1.1) (2019-06-24)
 
