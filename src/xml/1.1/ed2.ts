@@ -82,6 +82,28 @@ export function isRestrictedChar(c: number): boolean {
 }
 
 /**
+ * Determines whether a codepoint matches the ``CHAR`` production and does not
+ * match the ``RESTRICTED_CHAR`` production. ``isCharAndNotRestricted(x)`` is
+ * equivalent to ``isChar(x) && !isRestrictedChar(x)``. This function is faster
+ * than running the two-call equivalent.
+ *
+ * @param c The code point.
+ *
+ * @returns ``true`` if the codepoint matches ``CHAR`` and does not match
+ * ``RESTRICTED_CHAR``.
+ */
+export function isCharAndNotRestricted(c: number): boolean {
+  return (c === 0x9) ||
+    (c === 0xA) ||
+    (c === 0xD) ||
+    (c > 0x1F && c < 0x7F) ||
+    (c === 0x85) ||
+    (c > 0x9F && c <= 0xD7FF) ||
+    (c >= 0xE000 && c <= 0xFFFD) ||
+    (c >= 0x10000 && c <= 0x10FFFF);
+}
+
+/**
  * Determines whether a codepoint matches the ``S`` (space) production.
  *
  * @param c The code point.

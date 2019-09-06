@@ -324,6 +324,12 @@ describe("xml/1.1", () => {
       },
     };
 
+    // tslint:disable-next-line:mocha-no-side-effect-code
+    const isCharAndNotRestrictedCase: Case = {
+      matching: cases.CHAR_RE.matching
+        .filter(c => !cases.RESTRICTED_CHAR_RE.matching.includes(c)),
+    };
+
     describe("regexes", () => {
       // tslint:disable-next-line:mocha-no-side-effect-code
       for (const name of (Object.keys(cases) as (keyof typeof cases)[])) {
@@ -343,6 +349,12 @@ describe("xml/1.1", () => {
       // tslint:disable-next-line:mocha-no-side-effect-code
       makeCodePointTestTests(xml_1_1_ed2.isRestrictedChar,
                              cases.RESTRICTED_CHAR_RE);
+    });
+
+    describe(".isCharAndNotRestricted", () => {
+      // tslint:disable-next-line:mocha-no-side-effect-code
+      makeCodePointTestTests(xml_1_1_ed2.isCharAndNotRestricted,
+                             isCharAndNotRestrictedCase);
     });
 
     describe(".isS", () => {
