@@ -17,7 +17,7 @@
     "@types/chai": "^4.2.5",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
-    "conventional-changelog-cli": "^2.0.27",
+    "conventional-changelog-cli": "^2.0.28",
     "husky": "^3.0.9",
     "mocha": "^6.2.2",
     "ts-node": "^8.5.2",
