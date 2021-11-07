@@ -12,8 +12,8 @@
   "author": "Louis-Dominique Dubeau <ldd@lddubeau.com>",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-angular": "^9.1.2",
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-angular": "^14.1.0",
     "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
     "chai": "^4.3.4",
